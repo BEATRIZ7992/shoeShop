@@ -1,0 +1,20 @@
+{
+  "name": "sft-lit-element-cap",
+  "version": "1.0.0",
+  "description": "App de aprendizaje lit-element",
+  "main": "index.js",
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "2.6.0",
+    "lit-element": "3.1.1",
+    "lit-element-router": "^2.0.3",
+    "lit-html": "2.1.1",
+    "pwa-helpers": "0.9.1"
+  },
+  "scripts": {
+    "start": "es-dev-server --app-index index.html --node-resolve --watch --open"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "es-dev-server": "2.1.0"
+  }
+}
