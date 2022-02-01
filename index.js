@@ -53,7 +53,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         text-align: center;
         
       }
-      a{
+      app-link{
         color:whitesmoke;;
         text-decoration: none;
         font-family:inherit;

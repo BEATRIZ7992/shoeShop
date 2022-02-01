@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'lit';
+import {LitElement, html, css} from 'lit-element';
 import '../components/app-link';
 
 export class LitShoeMarket extends LitElement {
