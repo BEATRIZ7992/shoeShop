@@ -137,6 +137,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         </span>
       </header>
       <lit-shoe-market route="home"></lit-shoe-market>
+      <!-- faltan crear estas vistas -->
       <lit-shoe-detail route="detail">${this.route}</lit-shoe-detail>
       <lit-shoe-cart route="cart">${this.route}</lit-shoe-cart>
       <h1 route="not-found">Not Found</h1>

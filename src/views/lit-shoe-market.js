@@ -22,7 +22,14 @@ export class LitShoeMarket extends LitElement {
   render() {
     return html`
     <p>Shoe Market</p>
-    <app-link href="detail">detail</app-link>
+    <!-- ${this.shoeList.map(shoe=> {
+        return html`
+    <app-link href="detail" param=${shoe}>
+        <ul>
+            <li>shoe</li>
+        </ul>
+    </app-link> -->
+    `})}
     `;
   }
 
