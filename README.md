@@ -1,4 +1,4 @@
-# sft-lit-element-cap #
+# Shoes App #
 
 ### What is this repository for? ###
 
