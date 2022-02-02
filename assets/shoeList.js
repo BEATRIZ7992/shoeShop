@@ -1,4 +1,4 @@
-export default [
+export default   [
     {_id: '5e5af1865c30fedf4b813c06',
       isNew: true,
       featured: false,

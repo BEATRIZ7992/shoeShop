@@ -4,10 +4,11 @@ import './src/components/app-link'
 import { router, navigator, outlet } from 'lit-element-router';
 import {cart} from './assets/icons'
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-
+import  list from './assets/shoeList';
 /**
  * This component combines all the examples to be displayed. See the basic/detail/advanced folders for the actual examples.
  */
+
 
 class ShoeApp extends router(navigator(outlet(LitElement))){
   static get styles() {
@@ -18,7 +19,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         }
 
         header {
-        background: blue;
+        background: #d4d6dd;
         height: 32rem;
         width: 100vw;
       }
@@ -29,15 +30,17 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         height: 6rem;
         padding: 0 3rem;
         box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+        background:rgb(76, 84, 85); 
       }
+      
 
       div {
         height: 20rem;
-        background-color: lightgray
+        background-color: #d4d6dd;
       }
       footer {
         height: 32rem;
-        background: darkgrey
+        background: rgb(76, 84, 85); 
       }
       h1{
         margin-top:4rem;
@@ -83,7 +86,11 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
     return {
       smallScreen: { type: Boolean },
       route: { type: String },
-      title:{ type: Object }
+      title:{ type: Object },
+      params: { type: Object}  // array?
+     
+    
+   
     }
   }
   static get routes() {
@@ -94,7 +101,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       },
       {
         name: 'detail',
-        pattern: 'detail',
+        pattern: 'detail/:id',
       },
       {
         name: 'cart',
@@ -113,14 +120,19 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
     installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
       this.smallScreen = !matches;
     });
-    this.title={ home:'Men\'s Lifestyle Shoes', detail:'', cart:''}
+    this.title={ home:'Men\'s Lifestyle Shoes', detail:'zapatillas', cart:''}
+    this.params = list;
 
   }
 
   router(route, params, query, data) {
     this.route = route;
     this.activeRoute = route;
+    this.params._id=params;
+    console.log( params);
   }
+
+ 
   
 
   render() {
@@ -136,9 +148,9 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
           <app-link href="/cart">cart</app-link>
         </span>
       </header>
-      <lit-shoe-market route="home"></lit-shoe-market>
+      <lit-shoe-market route="home">${this.params.id}</lit-shoe-market> <!-- mal ?¿? -->
       <!-- faltan crear estas vistas -->
-      <lit-shoe-detail route="detail">${this.route}</lit-shoe-detail>
+      <lit-shoe-detail route="detail"></lit-shoe-detail>
       <lit-shoe-cart route="cart">${this.route}</lit-shoe-cart>
       <h1 route="not-found">Not Found</h1>
       <footer>
