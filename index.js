@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit-element';
 import './src/views/lit-shoe-market';
-import './src/components/app-link'
+import './src/views/lit-shoe-detail';
+import './src/views/lit-shoe-cart';
+import './src/components/app-link';
 import { router, navigator, outlet } from 'lit-element-router';
 import {cart} from './assets/icons'
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
@@ -19,8 +21,8 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         }
 
         header {
-        background: #d4d6dd;
-        height: 32rem;
+        background: rgb(76, 84, 85); 
+        height: 300px;
         width: 100vw;
       }
       nav {
@@ -35,8 +37,8 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       
 
       div {
-        height: 20rem;
-        background-color: #d4d6dd;
+        height: 0.2px;
+        background-color:  #d4d6dd;
       }
       footer {
         height: 32rem;
@@ -87,7 +89,11 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       smallScreen: { type: Boolean },
       route: { type: String },
       title:{ type: Object },
-      params: { type: Object}  // array?
+      shoeList: {type: Array},
+     selectShoe:{type:Object},
+      params: { type: Object}, // array?
+      cart: {type: Array}
+      
      
     
    
@@ -120,20 +126,52 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
     installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
       this.smallScreen = !matches;
     });
-    this.title={ home:'Men\'s Lifestyle Shoes', detail:'zapatillas', cart:''}
-    this.params = list;
+    this.title={ home:'Men\'s Lifestyle Shoes', detail:'Shoe', cart:''}
+     this.shoeList=list;
+    this.selectShoe={};
+    this.params = {};
+    this.cart=[];
+   
 
   }
+  
+ 
+ /*    _filters(){
+
+      const aux= this.shadowRoot.getElementById("new").value;
+      let shoeList=[];
+    
+      this.shoeList.filter((shoe)=>{
+        if(shoe.isNew==true){
+          this.shoeList.push(shoe.isNew)
+        }
+      });
+     this.shoeList=[...shoeList];
+    
+        console.log(aux, 'sal');
+               
+    
+     
+    
+    } */
 
   router(route, params, query, data) {
     this.route = route;
     this.activeRoute = route;
-    this.params._id=params;
-    console.log( params);
+    this.params=params;
+    /* console.log( params); */
+
+    this.findId();
   }
 
- 
+ findId(){
+   this.selectShoe= this.shoeList.find(item=>item._id==this.params.id)
+   this.selectShoe={...this.selectShoe}
+ }
   
+ handleCart(){
+    this.cart= [...this.cart,this.selectShoe]
+ }
 
   render() {
     return html`
@@ -148,14 +186,14 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
           <app-link href="/cart">cart</app-link>
         </span>
       </header>
-      <lit-shoe-market route="home">${this.params.id}</lit-shoe-market> <!-- mal ?¿? -->
+      <lit-shoe-market route="home" @cart=${this.handleCart} .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
       <!-- faltan crear estas vistas -->
-      <lit-shoe-detail route="detail"></lit-shoe-detail>
-      <lit-shoe-cart route="cart">${this.route}</lit-shoe-cart>
+      <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
+      <lit-shoe-cart route="cart" .cart=${this.cart}></lit-shoe-cart>
       <h1 route="not-found">Not Found</h1>
-      <footer>
+     <!--  <footer>
         <div></div>
-      </footer>
+      </footer> -->
 
     `;
   }
