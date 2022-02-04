@@ -1,5 +1,6 @@
 import {LitElement, html, css} from 'lit-element';
 
+import  list from '../../assets/shoeList';
 
 
 
@@ -44,8 +45,9 @@ export class LitShoeCart extends LitElement {
 
   static get properties() {
     return {
-     
-        cart:{type: Array}
+        CartNumero:{type:Number},
+        cart:{type: Array},
+        list: {type: Array}
     };
   }
 
@@ -54,17 +56,50 @@ export class LitShoeCart extends LitElement {
     
       
    this.cart=[]
+   this.list=list;
       
-    
+    this.CartNumero=0;
   }
   
+  totalCart() {
+   this.cartNumero=0;
+  
+  
+    
+    return this.cart.reduce((total, item) => {
+      
+        // De cada elemento obtenemos su precio
+        const miItem = this.list.filter((itemList) => {
+                  return itemList._id === parseInt(item);
+      });
+  
+        return this.cartNumero + miItem.price;
+    
+  
+    }, 0).toFixed(2);
+   
+  
+  }
 
+/*   TotalCart(){
+    this.dispatchEvent(new CustomEvent('total-cart'))
+    console.log('total');
+  }
+  */
  
   
   render() {
     return html`
 
-
+<aside class="col-sm-4">
+            <h2>Carrito</h2>
+            <!-- Elementos del carrito -->
+            
+            <hr>
+            <!-- Precio total -->
+            <p class="text-right" ${this.totalCart} >Total:${this.cartNumero}0 &euro;</p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        </aside>
 <div class="container">
     ${this.cart.map(cart=> {
         return html`
@@ -79,6 +114,7 @@ export class LitShoeCart extends LitElement {
           </div>
           
         </ul> </div>
+        
     </div>
  
    `})}

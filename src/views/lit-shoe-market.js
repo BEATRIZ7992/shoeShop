@@ -79,12 +79,11 @@ export class LitShoeMarket extends LitElement {
   }
 
   //mandar filtros
-/*  handleFilter(){
+ handleFilter(){
   this.dispatchEvent(new CustomEvent('filter'))
   console.log('filter');
- } */
+ }
  
-  
   
   render() {
     return html`
@@ -93,15 +92,15 @@ export class LitShoeMarket extends LitElement {
 
    <button @click="${() =>this.seeList()}">boton</button>
   
-<!--     <div >
-  <select id="filtrado" @change="${this.handleFilter}">
+    <div >
+  <select id="search" value="search" @change="${this.handleFilter}">
     <option value="0">Select</option>
-    <option value="0">Todos</option>
-    <option value="new">New</option>
+    <option value="todos">Todos</option>
+    <option value="isnew">New</option>
     <option value="feature">Feature</option>
-    <option value="upcoming">Upcoming</option>
+    <option value="upcoming">Coming</option>
   </select>
-</div>  -->
+</div> 
 
 
      <div class="container">
@@ -119,11 +118,11 @@ export class LitShoeMarket extends LitElement {
               <strong><li class="price">${shoe.price}$</li></strong>
           </div>
           
-        </ul> <button @click=${this.handleCart}>+</button>
+        </ul> </app-link> <app-link href="cart"><button @click=${this.handleCart}>+</button></app-link>
     </div>
  
-   </app-link> </div>`})}  
-   <app-link href="cart"><button @click=${this.handleCart}>+</button></app-link> `;
+   </div>`})}  
+    `;
    
   }
 

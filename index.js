@@ -92,7 +92,8 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       shoeList: {type: Array},
      selectShoe:{type:Object},
       params: { type: Object}, // array?
-      cart: {type: Array}
+      cart: {type: Array},
+      shoeFilter:{type:Array}
       
      
     
@@ -136,24 +137,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
   }
   
  
- /*    _filters(){
 
-      const aux= this.shadowRoot.getElementById("new").value;
-      let shoeList=[];
-    
-      this.shoeList.filter((shoe)=>{
-        if(shoe.isNew==true){
-          this.shoeList.push(shoe.isNew)
-        }
-      });
-     this.shoeList=[...shoeList];
-    
-        console.log(aux, 'sal');
-               
-    
-     
-    
-    } */
 
   router(route, params, query, data) {
     this.route = route;
@@ -173,6 +157,26 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
     this.cart= [...this.cart,this.selectShoe]
  }
 
+ /* totalCart() {
+  this.cart=[]
+ const total = document.querySelector('#total');
+ total.value;
+
+  
+  return this.cart.reduce((total, item) => {
+    
+      // De cada elemento obtenemos su precio
+      const miItem = this.shoeList.filter((itemList) => {
+                return itemList._id === parseInt(item);
+    });
+
+      return total + miItem[0].price;
+  
+
+  }, 0).toFixed(2);
+ 
+
+} */
   render() {
     return html`
       <header>
@@ -186,10 +190,10 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
           <app-link href="/cart">cart</app-link>
         </span>
       </header>
-      <lit-shoe-market route="home" @cart=${this.handleCart} .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
+      <lit-shoe-market route="home" @cart=${this.handleCart} @filter=${this.getByCategory} .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
       <!-- faltan crear estas vistas -->
       <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
-      <lit-shoe-cart route="cart" .cart=${this.cart}></lit-shoe-cart>
+      <lit-shoe-cart route="cart"  .cart=${this.cart}></lit-shoe-cart>
       <h1 route="not-found">Not Found</h1>
      <!--  <footer>
         <div></div>
@@ -197,6 +201,37 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
 
     `;
   }
+  getByCategory(){
+
+    const aux= this.shadowRoot.getElementById('search');
+      this.shoeList=[]
+    this.shoeList.filter((shoe)=>{
+       if(this.aux==='todos'){
+        this.shoeList=[...shoeList];
+          
+        }else if(shoe.aux==='isnew'){
+          this.shoeList.isNew===false;
+         
+        }else if(shoe.aux==='feature'){
+          this.shoeList.featured===false
+         
+        }else if(shoe.aux==='upcoming'){
+          this.shoeList.upcoming===false;
+          
+        }
+        
+     console.log(aux, 'aqui');
+     
+     this.shoeList=[...shoeList];
+    })
+       
+      
+    
+    }
+  getAll(){
+   this.shoeList=[...this.shoeList]
+  }
+  
 
 }
 
