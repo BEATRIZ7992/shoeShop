@@ -190,7 +190,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
           <app-link href="/cart">cart</app-link>
         </span>
       </header>
-      <lit-shoe-market route="home" @cart=${this.handleCart} @filter=${this.getByCategory} .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
+      <lit-shoe-market route="home" @select=${this.getByCategory} @cart=${this.handleCart} @filterN=${this.getByNew} @filterF=${this.getByFeature} @filterA=${this.getAll} @filterU=${this.getByComming}  .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
       <!-- faltan crear estas vistas -->
       <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
       <lit-shoe-cart route="cart"  .cart=${this.cart}></lit-shoe-cart>
@@ -201,36 +201,83 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
 
     `;
   }
+//filtrado botones
+  getByNew(){
+    const aux= this.shadowRoot.getElementById('isNew');
+    let shoeFilter=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.isNew===true){
+        shoeFilter.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilter]
+    console.log(shoeFilter);
+  }
+  getByFeature(){
+    const aux= this.shadowRoot.getElementById('feature');
+    let shoeFilter=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.featured===true){
+        shoeFilter.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilter]
+    console.log(shoeFilter);
+  }
+  getByComming(){
+    const aux= this.shadowRoot.getElementById('upComing');
+    let shoeFilter=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.upcoming===true){
+        shoeFilter.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilter]
+    console.log(shoeFilter);
+
+  }
+//mal
+  getAll(){
+    const aux= this.shadowRoot.getElementById('todos');
+    let shoeListAll= [];
+    this.shoeList=[...shoeListAll]
+   console.log(shoeListAll);
+
+  }
+
+  //filtrado conbinado
   getByCategory(){
 
     const aux= this.shadowRoot.getElementById('search');
-      this.shoeList=[]
+    const isNew= this.shadowRoot.getElementById('isNew');
+    const feature= this.shadowRoot.getElementById('feature');
+    const upComing= this.shadowRoot.getElementById('upcoming');
+    let shoeFilter=[];
+
     this.shoeList.filter((shoe)=>{
-       if(this.aux==='todos'){
-        this.shoeList=[...shoeList];
-          
-        }else if(shoe.aux==='isnew'){
-          this.shoeList.isNew===false;
+       if(shoe.isNew===true){
+        shoeFilter.push(shoe)
          
-        }else if(shoe.aux==='feature'){
-          this.shoeList.featured===false
+        }else if(shoe.featured===false){
+          shoeFilter.push(shoe)
          
-        }else if(shoe.aux==='upcoming'){
-          this.shoeList.upcoming===false;
-          
+        }else if(shoe.upcoming===false){
+          shoeFilter.push(shoe)
+         
         }
         
-     console.log(aux, 'aqui');
      
-     this.shoeList=[...shoeList];
-    })
-       
+     
       
-    
+
+    })
+    this.shoeList=[...shoeFilter]
+    console.log(shoeFilter);
     }
-  getAll(){
-   this.shoeList=[...this.shoeList]
-  }
+  
   
 
 }

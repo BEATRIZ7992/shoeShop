@@ -68,39 +68,64 @@ export class LitShoeMarket extends LitElement {
       
     
   }
-  
+  //vista de carro
   handleCart(){
     this.dispatchEvent(new CustomEvent('cart'))
     console.log('cart');
   }
- 
-  seeList(){
+ //boton lista
+/*   seeList(){
     return console.log(this.shoeList);
-  }
+  } */
 
   //mandar filtros
- handleFilter(){
-  this.dispatchEvent(new CustomEvent('filter'))
-  console.log('filter');
+ handleFilterN(){
+  this.dispatchEvent(new CustomEvent('filterN'))
+  console.log('filterN');
  }
- 
-  
+ handleFilterF(){
+  this.dispatchEvent(new CustomEvent('filterF'))
+  console.log('filterF');
+ }
+ handleFilterU(){
+  this.dispatchEvent(new CustomEvent('filterU'))
+  console.log('filterU');
+ }
+ handleFilterA(){
+  this.dispatchEvent(new CustomEvent('filterA'))
+  console.log('filterA');
+ }
+
+//filtro conbinado select
+ handleFilterSelect(){
+  this.dispatchEvent(new CustomEvent('select'))
+  console.log('select');
+ }
+
+
+ //////
   render() {
     return html`
 
    
-
-   <button @click="${() =>this.seeList()}">boton</button>
+<!-- filtrado botones -->
+  <!--  <button @click="${() =>this.seeList()}">boton</button> -->
+  <div class="filtros">Filtrar por:
+  <button id="isNew" @click="${() =>this.handleFilterN()}">New </button>
+  <button id="feature" @click="${() =>this.handleFilterF()}">Feature</button>
+  <button id="upComing" @click="${() =>this.handleFilterU()}">Comming </button>
+  <button id="upComing" @click="${() =>this.handleFilterA()}">All </button>
+  </div> 
   
-    <div >
-  <select id="search" value="search" @change="${this.handleFilter}">
-    <option value="0">Select</option>
-    <option value="todos">Todos</option>
+ <!--  filtrado select -->
+  <div >
+   <select id="search" value="search" @change="${this.handleFilterSelect}">
+   
     <option value="isnew">New</option>
     <option value="feature">Feature</option>
     <option value="upcoming">Coming</option>
   </select>
-</div> 
+</div>  
 
 
      <div class="container">
