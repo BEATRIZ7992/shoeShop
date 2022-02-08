@@ -190,7 +190,15 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
           <app-link href="/cart">cart</app-link>
         </span>
       </header>
-      <lit-shoe-market route="home" @select=${this.getByCategory} @cart=${this.handleCart} @filterN=${this.getByNew} @filterF=${this.getByFeature} @filterA=${this.getAll} @filterU=${this.getByComming}  .shoeList=${this.shoeList} ></lit-shoe-market> <!-- mal ?¿? -->
+      <lit-shoe-market route="home" 
+        @select=${this.getByCategory} 
+        @cart=${this.handleCart} 
+          @filterN=${this.getByNew} 
+          @filterF=${this.getByFeature} 
+          
+          @filterU=${this.getByComming}  
+        .shoeList=${this.shoeList} >
+    </lit-shoe-market> <!-- mal ?¿? -->
       <!-- faltan crear estas vistas -->
       <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
       <lit-shoe-cart route="cart"  .cart=${this.cart}></lit-shoe-cart>
@@ -204,39 +212,39 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
 //filtrado botones
   getByNew(){
     const aux= this.shadowRoot.getElementById('isNew');
-    let shoeFilter=[]
+    let shoeFilterN=[]
 
     this.shoeList.filter((shoe)=>{
       if(shoe.isNew===true){
-        shoeFilter.push(shoe)
+        shoeFilterN.push(shoe)
       }
     });
-    this.shoeList=[...shoeFilter]
-    console.log(shoeFilter);
+    this.shoeList=[...shoeFilterN]
+    console.log(shoeFilterN);
   }
   getByFeature(){
     const aux= this.shadowRoot.getElementById('feature');
-    let shoeFilter=[]
+    let shoeFilterF=[]
 
     this.shoeList.filter((shoe)=>{
       if(shoe.featured===true){
-        shoeFilter.push(shoe)
+        shoeFilterF.push(shoe)
       }
     });
-    this.shoeList=[...shoeFilter]
-    console.log(shoeFilter);
+    this.shoeList=[...shoeFilterF]
+    console.log(shoeFilterF);
   }
   getByComming(){
     const aux= this.shadowRoot.getElementById('upComing');
-    let shoeFilter=[]
+    let shoeFilterU=[]
 
     this.shoeList.filter((shoe)=>{
       if(shoe.upcoming===true){
-        shoeFilter.push(shoe)
+        shoeFilterU.push(shoe)
       }
     });
-    this.shoeList=[...shoeFilter]
-    console.log(shoeFilter);
+    this.shoeList=[...shoeFilterU]
+    console.log(shoeFilterU);
 
   }
 //mal
@@ -248,24 +256,24 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
 
   }
 
-  //filtrado conbinado
+  //filtrado combinado
   getByCategory(){
 
     const aux= this.shadowRoot.getElementById('search');
     const isNew= this.shadowRoot.getElementById('isNew');
     const feature= this.shadowRoot.getElementById('feature');
     const upComing= this.shadowRoot.getElementById('upcoming');
-    let shoeFilter=[];
+    let shoeFilterB=[];
 
     this.shoeList.filter((shoe)=>{
        if(shoe.isNew===true){
-        shoeFilter.push(shoe)
+        shoeFilterB.push(shoe)
          
-        }else if(shoe.featured===false){
-          shoeFilter.push(shoe)
+        }else if(shoe.featured===true){
+          shoeFilterB.push(shoe)
          
-        }else if(shoe.upcoming===false){
-          shoeFilter.push(shoe)
+        }else if(shoe.upcoming===true){
+          shoeFilterB.push(shoe)
          
         }
         
@@ -274,8 +282,8 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       
 
     })
-    this.shoeList=[...shoeFilter]
-    console.log(shoeFilter);
+    this.shoeList=[...shoeFilterB]
+    console.log(shoeFilterB);
     }
   
   

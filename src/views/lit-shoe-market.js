@@ -48,6 +48,27 @@ export class LitShoeMarket extends LitElement {
           color: blue;
           font-size: 20px;
         }
+        .btn {
+          display: block;
+          background: grey;
+          color: white;
+          
+          margin: 10px;
+          border-radius: 5px;
+          box-shadow: rgba(0,0,0,0.9);
+          transition: all 200ms ease-in-out;
+          text-decoration: none;
+          
+         
+         
+        }
+        .btn:hover {
+          background: #6d85b1;
+        }
+        .filtros{
+          display: flex;
+          
+        }
     `;
   }
 
@@ -111,10 +132,10 @@ export class LitShoeMarket extends LitElement {
 <!-- filtrado botones -->
   <!--  <button @click="${() =>this.seeList()}">boton</button> -->
   <div class="filtros">Filtrar por:
-  <button id="isNew" @click="${() =>this.handleFilterN()}">New </button>
-  <button id="feature" @click="${() =>this.handleFilterF()}">Feature</button>
-  <button id="upComing" @click="${() =>this.handleFilterU()}">Comming </button>
-  <button id="upComing" @click="${() =>this.handleFilterA()}">All </button>
+  <button class="btn" id="isNew" @click="${() =>this.handleFilterN()}">New </button>
+  <button class="btn" id="feature" @click="${() =>this.handleFilterF()}">Feature</button>
+  <button class="btn" id="upComing" @click="${() =>this.handleFilterU()}">Comming </button>
+  <button class="btn" id="upComing" @click="${() =>this.handleFilterA()}">All </button>
   </div> 
   
  <!--  filtrado select -->

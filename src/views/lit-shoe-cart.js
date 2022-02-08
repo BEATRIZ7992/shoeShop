@@ -61,10 +61,16 @@ export class LitShoeCart extends LitElement {
     this.CartNumero=0;
   }
   
-  totalCart() {
-   this.cartNumero=0;
+  vaciasCart(){
+    this.cart=[];
+    this.cart=[...this.cart];
+    
+
+  }
+ get totalCart() {
+   /* this.CartNumero=0;
   
-  
+   const DOMtotal = document.getElementById('total');
     
     return this.cart.reduce((total, item) => {
       
@@ -73,19 +79,18 @@ export class LitShoeCart extends LitElement {
                   return itemList._id === parseInt(item);
       });
   
-        return this.cartNumero + miItem.price;
+        return this.CartNumero + miItem[0].price;
     
   
-    }, 0).toFixed(2);
-   
+    }, 0).toFixed(2); */
+   this.CartNumero=0;
+   this.cart.map(cart=>{
+     this.CartNumero += Number(cart.price)
+   })
   
   }
 
-/*   TotalCart(){
-    this.dispatchEvent(new CustomEvent('total-cart'))
-    console.log('total');
-  }
-  */
+
  
   
   render() {
@@ -97,8 +102,8 @@ export class LitShoeCart extends LitElement {
             
             <hr>
             <!-- Precio total -->
-            <p class="text-right" ${this.totalCart} >Total:${this.cartNumero}0 &euro;</p>
-            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+            <p class="text-right" ${this.totalCart} >Total:<span id="total">${this.CartNumero}</span>&euro;</p>
+            <button @click=${this.vaciasCart} id="boton-vaciar" class="btn btn-danger">Vaciar</button>
         </aside>
 <div class="container">
     ${this.cart.map(cart=> {
