@@ -1,6 +1,7 @@
 import {LitElement, html, css} from 'lit-element';
 import '../components/app-link';
-
+import '../components/filter'
+import  list from '../../assets/shoeList';
 
 
 export class LitShoeMarket extends LitElement {
@@ -10,6 +11,10 @@ export class LitShoeMarket extends LitElement {
     .container{
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
+      position: relative;
+      width: calc(100%-25%);
+     
+      
     }
     .imagen{
       height: 200px;
@@ -69,13 +74,30 @@ export class LitShoeMarket extends LitElement {
           display: flex;
           
         }
+        .arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin:20px;
+  cursor: pointer;
+  
+}
+
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+       
     `;
   }
 
   static get properties() {
     return {
+      showFilter:{type:Boolean},
       shoeList:{type: Array},
-     
+    
       
     };
   }
@@ -84,10 +106,107 @@ export class LitShoeMarket extends LitElement {
     super();
     
     
-      
+      this.shoeList=list;
      
       
     
+  }
+  //filtrado botones
+  getByNew(){
+    const aux= this.shadowRoot.getElementById('isNew');
+    let shoeFilterN=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.isNew===true){
+        shoeFilterN.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterN]
+    console.log(shoeFilterN);
+  }
+  getByFeature(){
+    const aux= this.shadowRoot.getElementById('feature');
+    let shoeFilterF=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.featured===true){
+        shoeFilterF.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterF]
+    console.log(shoeFilterF);
+  }
+  getByComming(){
+    const aux= this.shadowRoot.getElementById('upComing');
+    let shoeFilterU=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.upcoming===true){
+        shoeFilterU.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterU]
+    console.log(shoeFilterU);
+
+  }
+//mal
+  getAll(){
+    const aux= this.shadowRoot.getElementById('todos');
+    let shoeListAll= [];
+    this.shoeList=[...shoeListAll]
+   console.log(shoeListAll);
+
+  }
+
+  getByS(){
+    const aux= this.shadowRoot.getElementById('s');
+    let shoeFilterS=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.size==="39"){
+        shoeFilterS.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterS]
+    console.log(shoeFilterS);
+  }
+  getByM(){
+    const aux= this.shadowRoot.getElementById('m');
+    let shoeFilterM=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.size==="40"){
+        shoeFilterM.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterM]
+    console.log(shoeFilterM);
+  }
+  getByL(){
+    const aux= this.shadowRoot.getElementById('l');
+    let shoeFilterL=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.size==="41"){
+        shoeFilterL.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterL]
+    console.log(shoeFilterL);
+
+  }
+  getByXl(){
+    const aux= this.shadowRoot.getElementById('xL');
+    let shoeFilterXl=[]
+
+    this.shoeList.filter((shoe)=>{
+      if(shoe.size ==="42"){
+        shoeFilterXl.push(shoe)
+      }
+    });
+    this.shoeList=[...shoeFilterXl]
+    console.log(shoeFilterXl);
+
   }
   //vista de carro
   handleCart(){
@@ -100,23 +219,7 @@ export class LitShoeMarket extends LitElement {
   } */
 
   //mandar filtros
- handleFilterN(){
-  this.dispatchEvent(new CustomEvent('filterN'))
-  console.log('filterN');
- }
- handleFilterF(){
-  this.dispatchEvent(new CustomEvent('filterF'))
-  console.log('filterF');
- }
- handleFilterU(){
-  this.dispatchEvent(new CustomEvent('filterU'))
-  console.log('filterU');
- }
- handleFilterA(){
-  this.dispatchEvent(new CustomEvent('filterA'))
-  console.log('filterA');
- }
-
+ 
 //filtro conbinado select
  handleFilterSelect(){
   this.dispatchEvent(new CustomEvent('select'))
@@ -127,26 +230,33 @@ export class LitShoeMarket extends LitElement {
  //////
   render() {
     return html`
-
-   
+  <i class="arrow left" @click=${() => this.showFilter = !this.showFilter}></i>
+  ${this.showFilter ? html`
+ <lit-filter  @filterN=${this.getByNew} 
+          @filterF=${this.getByFeature} 
+          
+          @filterU=${this.getByComming} 
+          @filter-s=${this.getByS}
+          @filter-m=${this.getByM}
+          @filter-l=${this.getByL}
+          @filter-xl=${this.getByXl}
+         ></lit-filter>` : ''}
+ <div class="container">
 <!-- filtrado botones -->
   <!--  <button @click="${() =>this.seeList()}">boton</button> -->
-  <div class="filtros">Filtrar por:
-  <button class="btn" id="isNew" @click="${() =>this.handleFilterN()}">New </button>
-  <button class="btn" id="feature" @click="${() =>this.handleFilterF()}">Feature</button>
-  <button class="btn" id="upComing" @click="${() =>this.handleFilterU()}">Comming </button>
-  <button class="btn" id="upComing" @click="${() =>this.handleFilterA()}">All </button>
-  </div> 
+
   
  <!--  filtrado select -->
-  <div >
+<!--   <div >
    <select id="search" value="search" @change="${this.handleFilterSelect}">
    
     <option value="isnew">New</option>
     <option value="feature">Feature</option>
     <option value="upcoming">Coming</option>
   </select>
-</div>  
+</div> -->  
+
+
 
 
      <div class="container">
@@ -168,7 +278,7 @@ export class LitShoeMarket extends LitElement {
     </div>
  
    </div>`})}  
-    `;
+   `;
    
   }
 

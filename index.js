@@ -3,6 +3,8 @@ import './src/views/lit-shoe-market';
 import './src/views/lit-shoe-detail';
 import './src/views/lit-shoe-cart';
 import './src/components/app-link';
+import './src/components/filter';
+
 import { router, navigator, outlet } from 'lit-element-router';
 import {cart} from './assets/icons'
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
@@ -21,7 +23,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         }
 
         header {
-        background: rgb(76, 84, 85); 
+        background:  #5e42a6;;
         height: 300px;
         width: 100vw;
       }
@@ -32,7 +34,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         height: 6rem;
         padding: 0 3rem;
         box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
-        background:rgb(76, 84, 85); 
+        background:#312450;
       }
       
 
@@ -193,12 +195,12 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       <lit-shoe-market route="home" 
         @select=${this.getByCategory} 
         @cart=${this.handleCart} 
-          @filterN=${this.getByNew} 
-          @filterF=${this.getByFeature} 
-          
-          @filterU=${this.getByComming}  
+         
         .shoeList=${this.shoeList} >
+        
     </lit-shoe-market> <!-- mal ?¿? -->
+   
+
       <!-- faltan crear estas vistas -->
       <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
       <lit-shoe-cart route="cart"  .cart=${this.cart}></lit-shoe-cart>
@@ -209,52 +211,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
 
     `;
   }
-//filtrado botones
-  getByNew(){
-    const aux= this.shadowRoot.getElementById('isNew');
-    let shoeFilterN=[]
 
-    this.shoeList.filter((shoe)=>{
-      if(shoe.isNew===true){
-        shoeFilterN.push(shoe)
-      }
-    });
-    this.shoeList=[...shoeFilterN]
-    console.log(shoeFilterN);
-  }
-  getByFeature(){
-    const aux= this.shadowRoot.getElementById('feature');
-    let shoeFilterF=[]
-
-    this.shoeList.filter((shoe)=>{
-      if(shoe.featured===true){
-        shoeFilterF.push(shoe)
-      }
-    });
-    this.shoeList=[...shoeFilterF]
-    console.log(shoeFilterF);
-  }
-  getByComming(){
-    const aux= this.shadowRoot.getElementById('upComing');
-    let shoeFilterU=[]
-
-    this.shoeList.filter((shoe)=>{
-      if(shoe.upcoming===true){
-        shoeFilterU.push(shoe)
-      }
-    });
-    this.shoeList=[...shoeFilterU]
-    console.log(shoeFilterU);
-
-  }
-//mal
-  getAll(){
-    const aux= this.shadowRoot.getElementById('todos');
-    let shoeListAll= [];
-    this.shoeList=[...shoeListAll]
-   console.log(shoeListAll);
-
-  }
 
   //filtrado combinado
   getByCategory(){
