@@ -55,7 +55,7 @@ export class LitShoeMarket extends LitElement {
         }
         .btn {
           display: block;
-          background: grey;
+          background: #5e42a6;
           color: white;
           
           margin: 10px;
@@ -82,7 +82,9 @@ export class LitShoeMarket extends LitElement {
   margin:20px;
   cursor: pointer;
   
+  
 }
+
 
 
 .left {
@@ -97,6 +99,7 @@ export class LitShoeMarket extends LitElement {
     return {
       showFilter:{type:Boolean},
       shoeList:{type: Array},
+      all:{type:Array}
     
       
     };
@@ -107,7 +110,7 @@ export class LitShoeMarket extends LitElement {
     
     
       this.shoeList=list;
-     
+     this.all=list;
       
     
   }
@@ -152,9 +155,9 @@ export class LitShoeMarket extends LitElement {
 //mal
   getAll(){
     const aux= this.shadowRoot.getElementById('todos');
-    let shoeListAll= [];
-    this.shoeList=[...shoeListAll]
-   console.log(shoeListAll);
+
+    this.shoeList=this.all;
+   console.log('hola');
 
   }
 
@@ -230,17 +233,19 @@ export class LitShoeMarket extends LitElement {
  //////
   render() {
     return html`
+  <div class="transition">
   <i class="arrow left" @click=${() => this.showFilter = !this.showFilter}></i>
   ${this.showFilter ? html`
  <lit-filter  @filterN=${this.getByNew} 
           @filterF=${this.getByFeature} 
           
           @filterU=${this.getByComming} 
+          @filterA=${this.getAll} 
           @filter-s=${this.getByS}
           @filter-m=${this.getByM}
           @filter-l=${this.getByL}
           @filter-xl=${this.getByXl}
-         ></lit-filter>` : ''}
+         ></lit-filter>` : ''}</div>
  <div class="container">
 <!-- filtrado botones -->
   <!--  <button @click="${() =>this.seeList()}">boton</button> -->

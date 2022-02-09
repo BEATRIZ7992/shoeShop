@@ -4,6 +4,8 @@ import './src/views/lit-shoe-detail';
 import './src/views/lit-shoe-cart';
 import './src/components/app-link';
 import './src/components/filter';
+import './src/views/lit-shoe-review';
+
 
 import { router, navigator, outlet } from 'lit-element-router';
 import {cart} from './assets/icons'
@@ -117,6 +119,10 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
         pattern: 'cart',
       },
       {
+        name: 'review',
+        pattern: 'review',
+      },
+      {
         name: 'not-found',
         pattern: '*',
       },
@@ -129,7 +135,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
     installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
       this.smallScreen = !matches;
     });
-    this.title={ home:'Men\'s Lifestyle Shoes', detail:'Shoe', cart:''}
+    this.title={ home:'Men\'s Lifestyle Shoes', detail:'Shoe', cart:'', review: 'reviews'}
      this.shoeList=list;
     this.selectShoe={};
     this.params = {};
@@ -205,6 +211,7 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       <lit-shoe-detail route="detail" @cart=${this.handleCart} .selectShoe="${this.selectShoe}" ></lit-shoe-detail>
       <lit-shoe-cart route="cart"  .cart=${this.cart}></lit-shoe-cart>
       <h1 route="not-found">Not Found</h1>
+      <lit-shoe-review route="review"></Lit-shoe-review>
      <!--  <footer>
         <div></div>
       </footer> -->

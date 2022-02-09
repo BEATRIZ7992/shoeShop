@@ -23,6 +23,8 @@ export class Filter  extends LitElement {
         font-size: 15px;
         color:white;
         float:left;
+        transition: all 0.3s ease;
+        
       }
       .new {
           display:flex;
@@ -112,6 +114,7 @@ export class Filter  extends LitElement {
   <label><input type="checkbox" class="" id="feature" @click="${() =>this.handleFilterF()}">Feature</label>
   <label><input type="checkbox" class="" id="upComing" @click="${() =>this.handleFilterU()}">Comming</label>
   <label><input type="checkbox" class="" id="todos" @click="${() =>this.handleFilterA()}">All</label>
+  
  </div>
 
  <div class="new"><strong><p>Size:</p></strong>
