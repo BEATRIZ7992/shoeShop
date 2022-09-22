@@ -66,8 +66,41 @@ transition: 0.3s;
           font-size: 50px;
         }
       
-     
+        #form {
+          width: 250px;
+          margin: 0 auto;
+          height: 50px;
+        }
         
+        #form p {
+          text-align: center;
+        }
+        
+        #form label {
+          font-size: 40px;
+        }
+        
+        input[type="radio"] {
+          display: none;
+        }
+        
+        label {
+          color: grey;
+        }
+        
+        .clasificacion {
+          
+          unicode-bidi: bidi-override;
+        }
+        
+        label:hover,
+        label:hover ~ label {
+          color: orange;
+        }
+        
+        input[type="radio"]:checked ~ label {
+          color: orange;
+        }
          
         
     `;
@@ -95,6 +128,31 @@ handleCart(){
   console.log('cart');
 }
 
+
+//ampliar la imagen
+ ver(e){
+   document.onmousemove= ver;
+  var x, y, x1, x2, y1, y2;
+  fact= 800/400;
+  opp=100;
+
+  if(e==null) e= window.event;
+  x= e.clientX;
+  y= e.clientY;
+
+  x1=-opp+(x)*fact;
+  y1=-opp+(y)*fact;
+  x2=+opp+(x)*fact;
+  y2=+opp+(y)*fact;
+
+  document.images.grande.style.display='inline';
+  document.images.grande.style.left=(x)=(1-fact);
+  document.images.grande.style.top=(y)=(1-fact)
+  document.images.grande.style.clip="rect("+y1+"px,"+x2+"px,"+y2+"px,"+x1+"px)";
+
+}
+
+
   
   render() {
     return html`
@@ -106,8 +164,9 @@ handleCart(){
             <h2> ${this.selectShoe.name}</h2>
           </div>
 
-          <div class="picture">
-           <img src="${this.selectShoe.picture}">
+          <div class="picture" >
+           <img class=img1  src="${this.selectShoe.picture}">
+          
           </div>
         
           <div class="cart">
@@ -118,8 +177,25 @@ handleCart(){
     
         <div class="review">
       
-          <app-link href="review">
+          <app-link href="${this.selectShoe._id}/review">
             <button class="btn">Reviews</button>
+            <div class="valoracion">
+
+            <form>
+          <p class="clasificacion">
+            <input id="radio1" type="radio" name="estrellas" value="5"><!--
+            --><label for="radio1">★</label><!--
+            --><input id="radio2" type="radio" name="estrellas" value="4"><!--
+            --><label for="radio2">★</label><!--
+            --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+            --><label for="radio3">★</label><!--
+            --><input id="radio4" type="radio" name="estrellas" value="2"><!--
+            --><label for="radio4">★</label><!--
+            --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+            --><label for="radio5">★</label>
+          </p>
+        </form>
+  
           </app-link>
         </div>
       <div class="description">

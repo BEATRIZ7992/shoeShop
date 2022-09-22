@@ -91,6 +91,24 @@ export class LitShoeMarket extends LitElement {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
+
+.buttonArrow{
+background: 0px center white;
+border: 0px;
+border-radius: 50%;
+box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 4px 1px;
+color: rgb(107, 119, 140);
+cursor: pointer;
+height: 24px;
+opacity: 1;
+outline: 0px;
+padding: 0px;
+position: absolute;
+top: 32px;
+transition: background-color 100ms linear 0s, color 100ms linear 0s, opacity 300ms cubic-bezier(0.2, 0, 0, 1) 0s, transform 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
+transform: translate(-50%);
+width: 24px;
+}
        
     `;
   }
@@ -245,22 +263,15 @@ export class LitShoeMarket extends LitElement {
           @filter-m=${this.getByM}
           @filter-l=${this.getByL}
           @filter-xl=${this.getByXl}
-         ></lit-filter>` : ''}</div>
- <div class="container">
-<!-- filtrado botones -->
-  <!--  <button @click="${() =>this.seeList()}">boton</button> -->
+         >
+             
+        </lit-filter>` : ''}</div>
 
-  
- <!--  filtrado select -->
-<!--   <div >
-   <select id="search" value="search" @change="${this.handleFilterSelect}">
-   
-    <option value="isnew">New</option>
-    <option value="feature">Feature</option>
-    <option value="upcoming">Coming</option>
-  </select>
-</div> -->  
-
+        <div class="card-wrapper">
+        <slot name="title"></slot>
+        <slot name="details"></slot>
+        <slot name="click"></slot>
+      </div>
 
 
 

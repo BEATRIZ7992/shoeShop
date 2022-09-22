@@ -117,11 +117,13 @@ class ShoeApp extends router(navigator(outlet(LitElement))){
       {
         name: 'cart',
         pattern: 'cart',
+      
+        
       },
-      {
+       {
         name: 'review',
-        pattern: 'review',
-      },
+        pattern: 'detail/:id/review',
+      }, 
       {
         name: 'not-found',
         pattern: '*',

@@ -39,7 +39,29 @@ export class LitShoeCart extends LitElement {
         color: blue;
         font-size: 20px;
       }
- 
+      .btn {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;}
     `;
   }
 
@@ -62,11 +84,20 @@ export class LitShoeCart extends LitElement {
   }
   
   vaciasCart(){
-    this.cart=[];
-    this.cart=[...this.cart];
+    this.cart1=[];
+    this.cart=[...this.cart1];
     
 
   }
+
+  borrarItemCart(event){
+    this.cart=[]
+    const id = event.target.id;
+    this.cart= this.cart.filter((item => item.id !== id))
+ 
+    
+  }
+  
  get totalCart() {
    /* this.CartNumero=0;
   
@@ -115,7 +146,7 @@ export class LitShoeCart extends LitElement {
             <li>${cart.price}$</li>
             <li><img class="imagen" src="${cart.picture}" ></li>
             <li>${cart.marker}</li>
-
+          <button class="btn"  @click=${this.borrarItemCart}>x</button>
           </div>
           
         </ul> </div>

@@ -8,7 +8,41 @@ export class LitShoeReview extends LitElement {
   static get styles() {
     return css`
 
+    .container{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      background: white;
+      width:800px;
+      
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      border-radius: 5px;
+      margin: 50px 20px 20px 20px;
+      padding: 20px;
+      text-align: justify;
+      color:black;
+      float: left;
+    }
+    .card:hover{
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+border: none;
+outline: none;
 
+transition: 0.3s;
+    }
+
+    ul{
+      padding: 0;
+    margin: 20px 0 50px 0;
+    list-style-type: none;
+   
+    } 
+    
+
+
+    
     `;
   }
 
@@ -37,24 +71,28 @@ export class LitShoeReview extends LitElement {
 
 
           <div class="container">
-        <!--   ${this.review.review.map(shoe=> {
+         
+        
+          ${this.review[0].reviews.map(shoe=> {
         return html`
-        <app-link href="detail/${shoe._id}">
-  
-<div class="card">
         <ul >
           <div class="item">
-            <strong><li></li></strong>
+             <div class="card">
+            <li> ⭐${shoe.rate} </li>
+           <strong><li>Name: ${shoe.name}</li></strong>
           
-            <li><img class="imagen" src="${shoe.picture}" ></li>
-            <li>${shoe.marker}</li>
-              <strong><li class="price">${shoe.price}$</li></strong>
+            
+      
+              <li>${shoe.comment}</li>
           </div>
-          
-        </ul> </app-link> <app-link href="cart"><button @click=${this.handleCart}>+</button></app-link>
-    </div>
- 
-   </div>`})} -->
+          </div>
+        </ul>
+
+        `})}  
+        
+       
+      
+      
           </div>
  
    

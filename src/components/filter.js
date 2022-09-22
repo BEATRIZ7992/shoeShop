@@ -102,7 +102,9 @@ export class Filter  extends LitElement {
     console.log('filterXl');
    }
 
-  
+  pulsame(){
+    console.log('clickSlot');
+  }
 
   render() {
     return html`
@@ -124,6 +126,12 @@ export class Filter  extends LitElement {
   <label><input type="checkbox" class="" id="xl" @click="${() =>this.handleFilterSizeXl()}">42</label>
 </div>
   </div>
+  <div>
+  <h1 slot="title">Hola universo</h1>
+        <p slot="details">Esto es algo de texto</p>
+        <p>cualquier otro contenido</p>
+        <button slot="click" @click=${this.pulsame} >Slot</button>
+    </div>
      </aside>
     `;
   }
